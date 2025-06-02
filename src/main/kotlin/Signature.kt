@@ -1,12 +1,15 @@
+package site.remlit.blueb.httpSignatures
+
 import kotlinx.datetime.Clock
 import java.security.PublicKey
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
-import org.jetbrains.annotations.ApiStatus
 import kotlin.time.Duration.Companion.seconds
 
-@ApiStatus.Experimental
+/**
+ * Representation of a Signature on a HttpSignature
+ * */
 data class Signature(
     val value: String
 ) {
@@ -82,6 +85,4 @@ data class Signature(
 
         fun create(): Nothing = TODO()
     }
-
-    class IllegalSignatureException(message: String) : IllegalArgumentException(message)
 }

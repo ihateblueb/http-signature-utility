@@ -1,3 +1,6 @@
+import site.remlit.blueb.httpSignatures.HttpSignature
+import site.remlit.blueb.httpSignatures.Signature
+
 import kotlin.test.Test
 import kotlin.test.expect
 
@@ -27,7 +30,7 @@ class ParseTests {
 
     @Test
     fun signatureMatches() {
-        expect(signature.signature) { sampleSignature }
+        expect(signature.signature) { Signature(sampleSignature) }
     }
 
     @Test

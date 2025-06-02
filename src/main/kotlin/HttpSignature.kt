@@ -1,6 +1,8 @@
-import org.jetbrains.annotations.ApiStatus
+package site.remlit.blueb.httpSignatures
 
-@ApiStatus.Experimental
+/**
+ * Representation of Signature HTTP header
+ * */
 data class HttpSignature(
     val keyId: String,
     val algorithm: String,
@@ -10,6 +12,12 @@ data class HttpSignature(
     companion object {
         private val regexUtilities = RegexUtilities()
 
+        /**
+         * Parses Signature header to HttpSignature
+         *
+         * @param header String of Signature header from HTTP request
+         * @return [HttpSignature]
+         * */
         fun parseHeaderString(header: String): HttpSignature {
             val keyIdRegex = regexUtilities.buildHeaderRegex("keyId")
             val algorithmRegex = regexUtilities.buildHeaderRegex("algorithm")
