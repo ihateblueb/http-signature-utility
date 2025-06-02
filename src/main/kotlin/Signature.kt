@@ -8,7 +8,7 @@ import kotlinx.datetime.toInstant
 import kotlin.time.Duration.Companion.seconds
 
 /**
- * Representation of a Signature on a HttpSignature
+ * Representation of a Signature
  * */
 data class Signature(
     val value: String
