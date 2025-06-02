@@ -54,9 +54,9 @@ dependencies {
 Parsing a Signature header lets you access the underlying key id, algorithm, important headers, and signature easily.
 
 ```kotlin
-val sampleHttpSig = "keyId=\"https://activitypub.academy/users/bedacia_tukaban#main-key\",algorithm=\"rsa-sha256\",headers=\"(request-target) host date digest content-type\",signature=\"BAuQOg3NI6bf2cnx1PJaT+wvdh2qZcS5ZWi/Lbf15JJeBOzoypC0ZdNiE2BXKPPeuK2mbZF7ofscpbRqS7A9mdag/qvNl8z/CkSCyEbFOCm6wd1hlKsh8hXQQBCM2pb3yKhonEviqBbWt2S+bClS9JY5SDgexpdWGOFM6CUy0G7rvvt16mXAvpwh94NycnnssENxqGJCAIDsvo/b9ETjr6U7Vc9sCvoy7vMjmH9j3IdsAq55Xp3UbxggHHLHhtmHRH9VmI02FL9bc3QOBWHGlDNs0nx31IzTAJqGOLcnjkvjGTRx+k3jd4YDrwF0pmX5JM7w5vYJdCLsRoyuqHrXcA==\""
-val parsedHttpSig = HttpSignature.parseHeaderString(sampleSig)
-val sig = parsedHttpSig.signature // Returns Signature
+val sampleSignatureHeader = "keyId=\"https://activitypub.academy/users/bedacia_tukaban#main-key\",algorithm=\"rsa-sha256\",headers=\"(request-target) host date digest content-type\",signature=\"BAuQOg3NI6bf2cnx1PJaT+wvdh2qZcS5ZWi/Lbf15JJeBOzoypC0ZdNiE2BXKPPeuK2mbZF7ofscpbRqS7A9mdag/qvNl8z/CkSCyEbFOCm6wd1hlKsh8hXQQBCM2pb3yKhonEviqBbWt2S+bClS9JY5SDgexpdWGOFM6CUy0G7rvvt16mXAvpwh94NycnnssENxqGJCAIDsvo/b9ETjr6U7Vc9sCvoy7vMjmH9j3IdsAq55Xp3UbxggHHLHhtmHRH9VmI02FL9bc3QOBWHGlDNs0nx31IzTAJqGOLcnjkvjGTRx+k3jd4YDrwF0pmX5JM7w5vYJdCLsRoyuqHrXcA==\""
+val parsedSignatureHeader = HttpSignature.parseHeaderString(sampleSig)
+val httpSignature = parsedSignatureHeader.signature // Returns Signature
 ```
 
 ### Validating a Signature
