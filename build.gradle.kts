@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "site.remlit.blueb"
-version = "2025.6.1.2-SNAPSHOT"
+version = "2025.6.4.0-SNAPSHOT"
 
 description = "Simple Kotlin utility for parsing a Signature header string into something more usable, validating HTTP signatures, and more."
 

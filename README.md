@@ -71,7 +71,7 @@ val isSignatureValid = try {
         parseDateHowever(request.headers["Date"]),
         body
     )
-} catch (e: IllegalSignatureException) {
+} catch (e: SignatureException) {
     false
 }
 ```
