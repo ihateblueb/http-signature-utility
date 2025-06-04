@@ -69,10 +69,10 @@ data class Signature(
             val dateInstant = date.toInstant(TimeZone.currentSystemDefault())
 
             if (dateInstant > nowPlusMargin)
-                throw IllegalSignatureException("Date is more than $maxTimeMargin seconds past now.")
+                throw SignatureException("Date is more than $maxTimeMargin seconds past now.")
 
             if (dateInstant < nowMinusMargin)
-                throw IllegalSignatureException("Date is more than $maxTimeMargin seconds from now.")
+                throw SignatureException("Date is more than $maxTimeMargin seconds from now.")
 
             val javaSignature = java.security.Signature.getInstance("RSA")
                 .apply {
