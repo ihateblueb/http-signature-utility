@@ -60,7 +60,7 @@ data class Signature(
             maxTimeMargin: Long = 150,
         ): Boolean {
             /*
-            * 150ms is 2.5m, total of 5m window.
+            * 150s is 2.5m, total of 5m window.
             * */
 
             val nowPlusMargin = Clock.System.now().plus(maxTimeMargin.seconds)

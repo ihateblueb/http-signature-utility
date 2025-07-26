@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "site.remlit.blueb"
-version = "2025.6.4.0-SNAPSHOT"
+version = "2025.7.2.0-SNAPSHOT"
 
 description = "Simple Kotlin utility for parsing a Signature header string into something more usable, validating HTTP signatures, and more."
 
@@ -31,7 +31,7 @@ tasks.test {
     useJUnitPlatform()
 }
 
-val baseName = "httpSignatureUtility"
+val baseName = "http-signature-utility"
 
 tasks.jar {
     archiveBaseName = baseName
@@ -46,6 +46,13 @@ val sourcesJar by tasks.creating(Jar::class) {
 val dokkaJavadocJar by tasks.creating(Jar::class) {
     archiveBaseName = baseName
     archiveClassifier = "javadoc"
+    dependsOn(tasks.dokkaJavadoc)
+    from(tasks.dokkaJavadoc.flatMap { it.outputDirectory })
+}
+
+val dokkaHtmlZip by tasks.creating(Zip::class) {
+    archiveBaseName = baseName
+    archiveClassifier = "dokka"
     dependsOn(tasks.dokkaHtml)
     from(tasks.dokkaHtml.map { it.outputDirectory })
 }
@@ -53,6 +60,7 @@ val dokkaJavadocJar by tasks.creating(Jar::class) {
 artifacts {
     add("archives", sourcesJar)
     add("archives", dokkaJavadocJar)
+    add("archives", dokkaHtmlZip)
 }
 
 publishing {
@@ -70,18 +78,19 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             groupId = "site.remlit.blueb"
-            artifactId = "httpSignatureUtility"
+            artifactId = "http-signature-utility"
             version = project.version.toString()
 
             from(components["java"])
 
             artifact(sourcesJar)
             artifact(dokkaJavadocJar)
+            artifact(dokkaHtmlZip)
 
             pom {
-                name = "HttpSignatureUtility"
+                name = "http-signature-utility"
                 description = project.description
-                url = "https://github.com/ihateblueb/HttpSignatureUtility"
+                url = "https://github.com/ihateblueb/http-signature-utility"
 
                 licenses {
                     license {
@@ -99,9 +108,9 @@ publishing {
                 }
 
                 scm {
-                    connection = "scm:git:git://github.com/ihateblueb/HttpSignatureUtility.git"
-                    developerConnection = "scm:git:ssh://github.com/ihateblueb/HttpSignatureUtility.git"
-                    url = "https://github.com/ihateblueb/HttpSignatureUtility"
+                    connection = "scm:git:git://github.com/ihateblueb/http-signature-utility.git"
+                    developerConnection = "scm:git:ssh://github.com/ihateblueb/http-signature-utility.git"
+                    url = "https://github.com/ihateblueb/http-signature-utility"
                 }
             }
         }

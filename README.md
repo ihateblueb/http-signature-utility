@@ -1,4 +1,4 @@
-# HttpSignatureUtility
+# http-signature-utility
 
 Simple Kotlin utility for parsing a `Signature` header string into something more usable, validating HTTP signatures, and more.
 
@@ -12,18 +12,18 @@ This library requires the use of a specific repository.
 <repositories>
     <!-- switch depending on if the version is snapshot or not -->
     <repository>
-        <id>site.remlit.main-releases</id>
+        <id>remlitsite-releases</id>
         <url>https://repo.remlit.site/releases</url>
     </repository>
     <repository>
-        <id>site.remlit.main-snapshots</id>
+        <id>remlitsite-snapshots</id>
         <url>https://repo.remlit.site/snapshots</url>
     </repository>
 </repositories>
 <dependencies>
     <dependency>
         <groupId>site.remlit.blueb</groupId>
-        <artifactId>httpSignatureUtility</artifactId>
+        <artifactId>http-signature-utility</artifactId>
         <version>${latest_version}</version>
     </dependency>
 </dependencies>
@@ -41,7 +41,7 @@ repositories {
 }
 
 dependencies {
-    implementation("site.remlit.blueb", "httpSignatureUtility", "$latestVersion")
+    implementation("site.remlit.blueb", "http-signature-utility", "$latestVersion")
 }
 ```
 
