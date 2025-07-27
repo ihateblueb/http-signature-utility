@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "2.1.10"
+    kotlin("jvm") version "2.2.0"
 
     id("org.jetbrains.dokka") version "2.0.0"
 
@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "site.remlit.blueb"
-version = "2025.7.2.0-SNAPSHOT"
+version = "2025.7.2.9-SNAPSHOT"
 
 description = "Simple Kotlin utility for parsing a Signature header string into something more usable, validating HTTP signatures, and more."
 
@@ -43,7 +43,7 @@ val sourcesJar by tasks.creating(Jar::class) {
     from(sourceSets.main.get().allSource)
 }
 
-val dokkaJavadocJar by tasks.creating(Jar::class) {
+val dokkaJavadocZip by tasks.creating(Zip::class) {
     archiveBaseName = baseName
     archiveClassifier = "javadoc"
     dependsOn(tasks.dokkaJavadoc)
@@ -59,7 +59,7 @@ val dokkaHtmlZip by tasks.creating(Zip::class) {
 
 artifacts {
     add("archives", sourcesJar)
-    add("archives", dokkaJavadocJar)
+    add("archives", dokkaJavadocZip)
     add("archives", dokkaHtmlZip)
 }
 
@@ -84,7 +84,7 @@ publishing {
             from(components["java"])
 
             artifact(sourcesJar)
-            artifact(dokkaJavadocJar)
+            artifact(dokkaJavadocZip)
             artifact(dokkaHtmlZip)
 
             pom {

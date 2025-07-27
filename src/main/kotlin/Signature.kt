@@ -5,6 +5,7 @@ import java.security.PublicKey
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
+import kotlin.io.encoding.Base64
 import kotlin.time.Duration.Companion.seconds
 
 /**
@@ -13,12 +14,25 @@ import kotlin.time.Duration.Companion.seconds
 data class Signature(
     val value: String
 ) {
+    /**
+     * Returns Base64 encoded string
+     * */
     override fun toString(): String {
         return value
     }
 
+    /**
+     * Returns Base64 decoded string of Signature value
+     * */
+    fun toDecodedString(): String {
+        return Base64.decode(value).toString()
+    }
+
+    /**
+     * Returns Base64 decoded ByteArray of Signature value
+     * */
     fun toByteArray(): ByteArray {
-        return value.toByteArray()
+        return Base64.decode(value)
     }
 
     /**
@@ -61,6 +75,7 @@ data class Signature(
         ): Boolean {
             /*
             * 150s is 2.5m, total of 5m window.
+            * Iceshrimp.NET also does 5m.
             * */
 
             val nowPlusMargin = Clock.System.now().plus(maxTimeMargin.seconds)
@@ -74,11 +89,9 @@ data class Signature(
             if (dateInstant < nowMinusMargin)
                 throw SignatureException("Date is more than $maxTimeMargin seconds from now.")
 
-            val javaSignature = java.security.Signature.getInstance("RSA")
-                .apply {
-                    initVerify(publicKey)
-                    update(data)
-                }
+            val javaSignature = java.security.Signature.getInstance("SHA256withRSA")
+            javaSignature.initVerify(publicKey)
+            javaSignature.update(data)
 
             return javaSignature.verify(signature.toByteArray())
         }
